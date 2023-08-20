@@ -38,7 +38,7 @@ def customChatInstance(file, userInput, language):
 
     template = """
     {context}
-    
+
     Use the context to answer the question. 
     If the context is a textbook, 
     then give some relevant examples to the question. 
@@ -72,9 +72,25 @@ class MainLink(Resource):
 
     def post(self):
         data = request.get_json()  # Retrieve JSON data from the request body
+
         input = data.get("input")
         file = data.get("file")
         language = data.get("language")
+
+        if input is None:
+            return {
+                "InputError": "Please provide a header named 'input' to ask the model a question"
+            }
+
+        if file is None:
+            return {
+                "FileError": "Please provide a header named 'file' to specify which data to train the model on"
+            }
+
+        if language is None:
+            return {
+                "FileError": "Please provide a header named 'language' to specify which language to return response in"
+            }
 
         output = customChatInstance(file, input, language)
 
