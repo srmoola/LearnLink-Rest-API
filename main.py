@@ -20,8 +20,11 @@ api = Api(app)
 def customChatInstance(file, userInput, language):
     os.environ["OPENAI_API_KEY"] = apikey.OPENAIKEY
 
-    loader = PyPDFLoader(file)
-    data = loader.load()
+    try:
+        loader = PyPDFLoader(file)
+        data = loader.load()
+    except Exception:
+        return {"Error": "File could not be read"}
 
     text_splitter = RecursiveCharacterTextSplitter(chunk_size=3000, chunk_overlap=300)
     all_splits = text_splitter.split_documents(data)
@@ -34,6 +37,8 @@ def customChatInstance(file, userInput, language):
     question = f"{input}; Give the answer in {language}"
 
     template = """
+    {context}
+    
     Use the context to answer the question. 
     If the context is a textbook, 
     then give some relevant examples to the question. 
@@ -41,7 +46,7 @@ def customChatInstance(file, userInput, language):
     If the data does not provide an answer, 
     then you can use some of your own knowledge to answer. 
     Do not make up answers.
-    {context}
+    
     Question: {question}
     """
 

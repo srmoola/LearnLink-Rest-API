@@ -1,5 +1,6 @@
 const postData = {
-  input: "What is a linear approximation",
+  input:
+    "Can you give a linear approximation example and answer from the book. Provide the page number or chapter number",
   file: "https://firebasestorage.googleapis.com/v0/b/learnlink-87932.appspot.com/o/Calculus.pdf?alt=media&token=d916ee9d-ef04-4182-baef-ad31ef8b42a1",
   language: "English",
 };
