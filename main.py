@@ -17,7 +17,7 @@ api = Api(app)
 
 
 def customChatInstance(file, userInput, language):
-    os.environ["OPENAI_API_KEY"] = "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"
+    os.environ["OPENAI_API_KEY"] = "HIDDEN OPENAI API KEY"
 
     try:
         loader = PyPDFLoader(file)
