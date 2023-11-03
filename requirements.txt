@@ -1,0 +1,7 @@
+flask
+flask-restful
+flask-cors
+langchain
+chromadb
+openai
+pypdf

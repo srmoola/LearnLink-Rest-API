@@ -8,9 +8,8 @@ from langchain.prompts import PromptTemplate
 from flask import Flask, request
 from flask_restful import Resource, Api
 from flask_cors import CORS, cross_origin
-import apikey
 import os
-
+import numpy
 
 app = Flask(__name__)
 CORS(app)
@@ -18,7 +17,7 @@ api = Api(app)
 
 
 def customChatInstance(file, userInput, language):
-    os.environ["OPENAI_API_KEY"] = apikey.OPENAIKEY
+    os.environ["OPENAI_API_KEY"] = "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"
 
     try:
         loader = PyPDFLoader(file)
@@ -39,9 +38,7 @@ def customChatInstance(file, userInput, language):
     template = """
     {context}
 
-    Use the context to answer the question. 
-    If the context is a textbook, 
-    then give some relevant examples to the question. 
+    Use the data to answer the question.  
     Do this specifially based on the data provided. 
     If the data does not provide an answer, 
     then you can use some of your own knowledge to answer. 
@@ -97,7 +94,7 @@ class MainLink(Resource):
         return output
 
     def get(self):
-        return {"Hello": "Server is Running!"}
+        return {"Server Status": "Server is Running!"}
 
 
 api.add_resource(MainLink, "/")
